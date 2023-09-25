@@ -137,9 +137,7 @@ bool operator==(const Tray& lhs, const Tray& rhs) {
 }
 
 
-void Tray::remove(Egg badEgg) { // This function is suppose to remove all eggs of the same weight class in the tray.
-    
-
+void Tray::remove(Egg badEgg) { 
     for (int i = 0; i < currentEggs; i++) {
         if (carton[i] == badEgg) {
             for (int j = i; j < currentEggs; j++) 
@@ -155,11 +153,11 @@ void Tray::place_front(Egg egg) {
 
     if (currentEggs != capacity) { 
         for (int i = currentEggs; i >= 0; i--) 
-            carton[i+1] = carton[i]; 
-    } else {
+            carton[i+1] = carton[i]; // If carton is not full, shift all existing elements to the right one position
+    } else { // If carton is full, then create a new one with 2 more slots and copy all elements
         Egg* newCarton = new Egg[capacity + 2];
         for (int i = 0; i < currentEggs; i++) 
-            newCarton[i+1] = carton[i];
+            newCarton[i+1] = carton[i]; // Copy all elements over and shift them to the right one place.
 
         delete[] carton;
         carton = newCarton;
