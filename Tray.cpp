@@ -5,6 +5,7 @@ using namespace std;
 
  // Initialization list with desired initial values.
 Tray::Tray() : carton(new Egg[2]), capacity(2), currentEggs(0) {}
+
 Tray::~Tray() {
     delete[] carton; // Release the memory allocated at the address.
 }
@@ -67,7 +68,6 @@ ostream& operator<<(ostream& os, const Tray& rhs) {
 //     return os;
 // }
 
-// This function should compare the eggs in each carton and return true if they have the same amount of each egg in each carton.
 // The trays are conidered equal if they have the same number of eggs and the same number of each egg.
 bool operator==(const Tray& lhs, const Tray& rhs) {
     
@@ -76,8 +76,8 @@ bool operator==(const Tray& lhs, const Tray& rhs) {
     else if (lhs.currentEggs == 0 && rhs.currentEggs == 0)
         return true;
     
-    int lhsEggs[7] = {0};
-    int rhsEggs[7] = {0};
+    int lhsEggs[7] = {0}; // Shorthand to set all elements with a default value of 0
+    int rhsEggs[7] = {0}; // Can also be written as 'int rhsEggs[7]{0}'
 
     /*
     Array index layout
@@ -93,19 +93,19 @@ bool operator==(const Tray& lhs, const Tray& rhs) {
     // Count the number of each egg type in the left hand side carton.
     for (int i = 0; i < lhs.currentEggs; i++) {
         if (lhs.carton[i].getWeightChar() == 'E') {
-            lhsEggs[0]++;
+            lhsEggs[0]++; // Increment error count
         } else if (lhs.carton[i].getWeightChar() == '.') {
-            lhsEggs[1]++;
+            lhsEggs[1]++; // Increment peewee count
         } else if (lhs.carton[i].getWeightChar() == '*') {
-            lhsEggs[2]++;
+            lhsEggs[2]++; // Increment small count
         } else if (lhs.carton[i].getWeightChar() == 'o') {
-            lhsEggs[3]++;
+            lhsEggs[3]++; // Increment medium count
         } else if (lhs.carton[i].getWeightChar() == 'O') {
-            lhsEggs[4]++;
+            lhsEggs[4]++; // Increment large count
         } else if (lhs.carton[i].getWeightChar() == '0') {
-            lhsEggs[5]++;
+            lhsEggs[5]++; // Increment xlarge count
         } else if (lhs.carton[i].getWeightChar() == '@') {
-            lhsEggs[6]++;
+            lhsEggs[6]++; // Increment jumbo count
         }
     }
 
@@ -135,7 +135,6 @@ bool operator==(const Tray& lhs, const Tray& rhs) {
     }
     return true; // If this is reached, then the number of eggs of each type is equal - therefor the trays are equal.
 }
-
 
 void Tray::remove(Egg badEgg) { 
     for (int i = 0; i < currentEggs; i++) {

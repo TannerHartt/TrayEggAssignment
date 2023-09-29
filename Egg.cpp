@@ -3,13 +3,9 @@ using namespace std;
 #include "Egg.h" 
 
 
-Egg::Egg() : weightInOunces(0) {
-        
-};
+Egg::Egg() : weightInOunces(0) { };
 
-Egg::Egg(float weight) : weightInOunces(weight) {
-    
-};
+Egg::Egg(float weight) : weightInOunces(weight) { };
 
 ostream& operator<<(ostream& os, const Egg& rhs)
 {
@@ -31,7 +27,7 @@ ostream& operator<<(ostream& os, const Egg& rhs)
     os << "@";
   }
   return os;
-}
+};
 
 bool operator==(const Egg& lhs, const Egg& rhs) {
     if (lhs.weightInOunces < 1.25 && rhs.weightInOunces < 1.25) {
@@ -55,7 +51,7 @@ bool operator==(const Egg& lhs, const Egg& rhs) {
         return true;
     }
     return false;
-}
+};
 
 char Egg::getWeightChar() {
     if (weightInOunces < 1.25) return 'E'; 
@@ -66,4 +62,5 @@ char Egg::getWeightChar() {
     else if (weightInOunces >= 2.25 && weightInOunces < 2.5) return '0';
     else if (weightInOunces >= 2.5) return '@';
     return ' '; // Should never get here.
-}
+};
+
