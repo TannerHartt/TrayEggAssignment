@@ -8,7 +8,7 @@ Tray::Tray() : carton(new Egg[2]), capacity(2), currentEggs(0) {}
 
 Tray::~Tray() {
     delete[] carton; // Release the memory allocated at the address.
-}
+};
 
 void Tray::place_back(Egg egg) {
     if (currentEggs == capacity) {
@@ -23,7 +23,7 @@ void Tray::place_back(Egg egg) {
     }
     carton[currentEggs] = egg;
     currentEggs++;
-}   
+};
 
 ostream& operator<<(ostream& os, const Tray& rhs) {
     os << "+---+\n";
@@ -35,45 +35,16 @@ ostream& operator<<(ostream& os, const Tray& rhs) {
     
     os << "+---+\n";
     return os;
-}
+};
 
-
-// This is another solution, using a while loop. (More complicated than the one above.)
-// ostream& operator<<(ostream& os, const Tray& rhs) {
-//     os << "+---+\n";
-    
-//     int index = 0;
-//     while (index < rhs.capacity) {
-//         os << "|"; // Print the left side of the carton.
-
-//         // Print the eggs in the carton. 
-//         for (int i = 0; i < 2; i++) {
-//             int egg = index + i; // Calculate the index of the egg in the carton.
-
-//             if (egg < rhs.currentEggs) os << rhs.carton[egg]; // Print the egg if it exists.
-//             else os << " "; // Print a space if there is no egg at the index.
-            
-//             if (i == 0) os << "|"; // Print the divider between the eggs.
-//         }
-
-//         os << "|\n"; // Print the right side of the carton.
-//         index += 2; // Increment the index by 2 to move to the next row.
-
-//         if (rhs.capacity > index) { 
-//             os << "|-+-|\n"; // Print the divider between the rows.
-//         }
-//     }
-
-//     os << "+---+\n";
-//     return os;
-// }
 
 // The trays are conidered equal if they have the same number of eggs and the same number of each egg.
 bool operator==(const Tray& lhs, const Tray& rhs) {
     
+    // Base case checks
     if (lhs.currentEggs != rhs.currentEggs || lhs.capacity != rhs.capacity)
         return false;
-    else if (lhs.currentEggs == 0 && rhs.currentEggs == 0)
+    if (lhs.currentEggs == 0 && rhs.currentEggs == 0)
         return true;
     
     int lhsEggs[7] = {0}; // Shorthand to set all elements with a default value of 0
@@ -134,19 +105,19 @@ bool operator==(const Tray& lhs, const Tray& rhs) {
             return false;
     }
     return true; // If this is reached, then the number of eggs of each type is equal - therefor the trays are equal.
-}
+};
 
-void Tray::remove(Egg badEgg) { 
+void Tray::remove(Egg badEgg) {
     for (int i = 0; i < currentEggs; i++) {
         if (carton[i] == badEgg) {
-            for (int j = i; j < currentEggs; j++) 
+            for (int j = i; j < currentEggs; j++)
                 carton[j] = carton[j+1];
             
             currentEggs--;
             i--;
         }
     }
-}
+};
 
 void Tray::place_front(Egg egg) { 
 
@@ -155,13 +126,13 @@ void Tray::place_front(Egg egg) {
             carton[i+1] = carton[i]; // If carton is not full, shift all existing elements to the right one position
     } else { // If carton is full, then create a new one with 2 more slots and copy all elements
         Egg* newCarton = new Egg[capacity + 2];
-        for (int i = 0; i < currentEggs; i++) 
+        for (int i = 0; i < currentEggs; i++)
             newCarton[i+1] = carton[i]; // Copy all elements over and shift them to the right one place.
 
-        delete[] carton;
-        carton = newCarton;
-        capacity += 2;
+        delete[] carton; // Delete old carton memory
+        carton = newCarton; // Update carton to the new carton
+        capacity += 2; // Increase capacity variable to reflect new size.
     } 
     carton[0] = egg;
     currentEggs++;
-}
+};
