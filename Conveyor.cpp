@@ -5,7 +5,20 @@ using namespace std;
 
 Conveyor::Conveyor() : head(nullptr), tail(nullptr), length(0) {}
 
-Conveyor::Harness::Harness(Tray* t, Harness* n) : currentTray(t), next(n) {}
+Conveyor::Harness::Harness(Tray* t, Harness* n) : tray(t), next(n) {}
+
+Conveyor::Harness::~Harness() {
+   delete tray;
+}
+
+Conveyor::~Conveyor() {
+   Harness* curr = head;
+   while (curr) {
+      Harness* temp = curr;
+      curr = curr->next;
+      delete temp;
+   }
+}
 
 void Conveyor::attach_front(Tray* engine) {
    Harness* curr = new Harness(engine);
@@ -35,9 +48,14 @@ void Conveyor::attach_back(Tray* caboose) {
 ostream& operator<<(ostream& os, const Conveyor& rhs) {
 
    os << "  |  " << endl;
-   while (rhs.head) {
-      
+   Conveyor::Harness* curr = rhs.head;
+   while(curr) {
+      os << *curr;
+      curr = curr->next;
    }
-   
    return os;
+}
+
+void Conveyor::remove(const Tray& thisone) {
+   
 }
