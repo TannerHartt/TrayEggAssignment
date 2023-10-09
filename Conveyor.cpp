@@ -25,8 +25,8 @@ void Conveyor::attach_front(Tray* engine) {
    if (length == 0) {
       head = curr;
       tail = curr;
-   }
-   else {
+   } else {
+      // head = new Harness(engine, head);
       curr->next = head;
       head = curr;
    }
@@ -46,7 +46,6 @@ void Conveyor::attach_back(Tray* caboose) {
 }
 
 ostream& operator<<(ostream& os, const Conveyor& rhs) {
-
    os << "  |  " << endl;
    Conveyor::Harness* curr = rhs.head;
    while(curr) {
@@ -56,6 +55,50 @@ ostream& operator<<(ostream& os, const Conveyor& rhs) {
    return os;
 }
 
-void Conveyor::remove(const Tray& thisone) {
+void Conveyor::remove(const Tray& searchTray) {
    
+   Harness* prev = nullptr;
+   Harness* curr = head;
+
+    while (curr) {
+        if (*curr->tray == searchTray) {
+            if (prev) {
+                prev->next = curr->next;
+            } else {
+                head = curr->next;
+            }
+
+            Harness* temp = curr;
+            curr = curr->next;
+            delete temp;
+        } else {
+            prev = curr;
+            curr = curr->next;
+        }
+    }
+
 }
+
+
+// void Conveyor::remove(const Tray& searchTray) {
+   // Harness prev(nullptr, head);
+   // Harness* curr = &prev;
+   // while (curr) {
+   //    if (*curr->next->tray == searchTray) {
+   //       Harness* temp = curr->next;
+   //       curr->next = curr->next->next;
+   //       delete temp;
+   //       length--;
+
+   //    } else {
+   //       curr = curr->next;
+   //    }
+   // }
+
+   // if (curr == &prev) {
+   //    head = tail = nullptr;
+   // } else {
+   //    tail = curr;
+   //    head = prev.next;
+   // }
+//}

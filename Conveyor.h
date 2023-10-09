@@ -7,18 +7,18 @@ using namespace std;
 class Conveyor {
     private: 
         struct Harness {
-            Tray *tray;
-            Harness *next;
+            Tray* tray;
+            Harness* next;
             Harness(Tray *t, Harness *n = nullptr);
             ~Harness();
             friend ostream &operator<<(ostream &os, const Harness &rhs) {
-                os << " / \\ " << endl;
-                os << "/   \\" << endl;
+                os << " / \\ \n";
+                os << "/   \\\n";
                 os << *rhs.tray;
-                os << "\\   /" << endl;
-                os << " \\ / " << endl;
-                if (!rhs.next) os << "  S  " << endl;
-                else os << "  $  " << endl;
+                os << "\\   /\n";
+                os << " \\ / \n";
+                if (!rhs.next) os << "  S  \n";
+                else os << "  $  \n";
                 return os;
             }
         };
