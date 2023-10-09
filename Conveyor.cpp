@@ -21,21 +21,21 @@ Conveyor::~Conveyor() {
 }
 
 void Conveyor::attach_front(Tray* engine) {
-   Harness* curr = new Harness(engine);
-   if (length == 0) {
+   if (!head) {
+      Harness* curr = new Harness(engine);
       head = curr;
       tail = curr;
    } else {
-      // head = new Harness(engine, head);
-      curr->next = head;
-      head = curr;
+      head = new Harness(engine, head);
+      // curr->next = head;
+      // head = curr;
    }
    length++;
 }
 
 void Conveyor::attach_back(Tray* caboose) {
    Harness* temp = new Harness(caboose);
-   if (length == 0) {
+   if (!head) {
       head = temp;
       tail = temp;      
    } else {
@@ -76,29 +76,4 @@ void Conveyor::remove(const Tray& searchTray) {
             curr = curr->next;
         }
     }
-
 }
-
-
-// void Conveyor::remove(const Tray& searchTray) {
-   // Harness prev(nullptr, head);
-   // Harness* curr = &prev;
-   // while (curr) {
-   //    if (*curr->next->tray == searchTray) {
-   //       Harness* temp = curr->next;
-   //       curr->next = curr->next->next;
-   //       delete temp;
-   //       length--;
-
-   //    } else {
-   //       curr = curr->next;
-   //    }
-   // }
-
-   // if (curr == &prev) {
-   //    head = tail = nullptr;
-   // } else {
-   //    tail = curr;
-   //    head = prev.next;
-   // }
-//}
