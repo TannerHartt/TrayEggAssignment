@@ -4,12 +4,8 @@ using namespace std;
 #include "Tray.h"
 
 Conveyor::Conveyor() : head(nullptr), tail(nullptr), length(0) {}
-
 Conveyor::Harness::Harness(Tray* t, Harness* n) : tray(t), next(n) {}
-
-Conveyor::Harness::~Harness() {
-   delete tray;
-}
+Conveyor::Harness::~Harness() { delete tray; }
 
 Conveyor::~Conveyor() {
    Harness* curr = head;
@@ -27,8 +23,6 @@ void Conveyor::attach_front(Tray* engine) {
       tail = curr;
    } else {
       head = new Harness(engine, head);
-      // curr->next = head;
-      // head = curr;
    }
    length++;
 }
@@ -62,12 +56,9 @@ void Conveyor::remove(const Tray& searchTray) {
 
     while (curr) {
         if (*curr->tray == searchTray) {
-            if (prev) {
-                prev->next = curr->next;
-            } else {
-                head = curr->next;
-            }
-
+            if (prev) prev->next = curr->next;
+            else head = curr->next;
+            
             Harness* temp = curr;
             curr = curr->next;
             delete temp;
