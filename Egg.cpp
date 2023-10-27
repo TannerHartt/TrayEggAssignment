@@ -64,3 +64,7 @@ char Egg::getWeightChar() {
     return ' '; // Should never get here.
 };
 
+/*
+Egg equaity operator function
+if two eggs are equal, return false, else return true
+*/

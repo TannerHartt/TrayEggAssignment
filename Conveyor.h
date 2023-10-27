@@ -17,8 +17,12 @@ class Conveyor {
                 os << *rhs.tray;
                 os << "\\   /\n";
                 os << " \\ / \n";
-                if (!rhs.next) os << "  S  \n";
-                else os << "  $  \n";
+                if (rhs.next != nullptr) os << "  $  \n";
+                else {
+                    os << "  S  \n";
+                    os << endl;
+                    os << endl;
+                }
                 return os;
             }
         };

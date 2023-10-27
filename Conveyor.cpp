@@ -41,6 +41,10 @@ void Conveyor::attach_back(Tray* caboose) {
 
 ostream& operator<<(ostream& os, const Conveyor& rhs) {
    os << "  |  " << endl;
+   if (rhs.head == nullptr) {
+      os << endl << endl;
+      return os;
+   }
    Conveyor::Harness* curr = rhs.head;
    while(curr) {
       os << *curr;
@@ -68,3 +72,15 @@ void Conveyor::remove(const Tray& searchTray) {
         }
     }
 }
+
+
+/*
+Tray* detach_front();
+   * return nullptr if there are 0 tray/harness in the conveyor
+   * return the heads data (the tray)
+   *  + before, reease the harness
+   *  + before releasing the harness, assign nullptr to its data attribute
+   * release harness after grabbing data
+   * return nullptr if no more exist
+
+*/

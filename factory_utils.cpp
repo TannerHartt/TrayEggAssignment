@@ -4,8 +4,25 @@
 #include "factory_utils.h"
 using namespace std;
 
-void load_conveyors(vector<Conveyor*> &assembly_line)
-{
+char charSwap(char ch) {
+        switch (ch) {
+            case '|': 
+                ch = '-';
+                break;
+            case '-': 
+                ch = '|';
+                break;
+            case '/': 
+                ch = '\\';
+                break;
+            case '\\':
+                ch = '/';
+                break;
+        }
+    return ch;
+}
+
+void load_conveyors(vector<Conveyor*> &assembly_line) {
     string input;
     Conveyor *convey;
     Tray *currTray;
@@ -28,31 +45,83 @@ void load_conveyors(vector<Conveyor*> &assembly_line)
 
 string basic_report(const vector<Conveyor*> &assembly_line) {
     ostringstream sout;
-    for(unsigned int i = 0; i < assembly_line.size(); i++) {
+    for(unsigned int i = 0; i < assembly_line.size(); i++)
         sout << *assembly_line.at(i) << "\n\n";
-    }
+    
     return sout.str();
 }
 
 string vertical_report(const vector<Conveyor*> &assembly_line) {
-    ostringstream sout;
-    string report = basic_report(assembly_line);
+    
     vector<string> strings;
 
-    for (Conveyor* convey : assembly_line) {
-        strings.push_back(report);
-        
+    // Fill string vector with each conveyor to decide largest
+    for (unsigned int i=0; i < assembly_line.size(); ++i) {
+        ostringstream sout;
+        sout << *assembly_line.at(i);
+        strings.push_back(sout.str());
     }
-
     
-    int largest = 0;
-    for (int i = 0; i < strings.size(); i++) {
-        string temp = strings[i];
-        if (temp.size() > largest) {
-            largest = temp.size();
+    // Find largest conveyor size
+    unsigned int largest = 0;
+    for (string str : strings) {
+        if (str.size() > largest) {
+            largest = str.size();
         }
     }
 
+    ostringstream sout;
+    for (unsigned int i = 0; i < largest; i+=6) {
+        for (unsigned int j = 0; j < strings.size(); j++) {
+            for (unsigned int k = 0; k < 5; k++) {
+                if ((i + 6) < strings.at(j).size()) {
+                    sout << strings.at(j).at(i + k);
+                } else {
+                    sout << ' ';
+                }
+            }
+            sout << "  ";
+        }
+        sout << endl;
+    }
 
+    return sout.str();
+}
+
+string horizontal_report(const vector<Conveyor*> &assembly_line) {
+    
+    vector<string> strings;
+
+    // Fill string vector with each conveyor
+    for (unsigned int i=0; i < assembly_line.size(); ++i) {
+        ostringstream sout;
+        sout << *assembly_line.at(i);
+        strings.push_back(sout.str());
+    }
+
+    unsigned int largest = 0;
+    for (string str : strings) {
+        if (str.size() > largest)
+            largest = str.size();
+    }
+
+    ostringstream sout;
+    for (unsigned int i = strings.size(); i--;) {
+        for (unsigned col = 5; col > 0; col--) {
+            for (unsigned row = 0; row < largest - 2; row+=6) {
+                if (row + 6 < strings.at(i).size()) {
+                    sout << charSwap(strings.at(i).at((row + col - 1)));
+                } else {
+                    sout << ' ';
+                }
+            }
+            sout << endl;
+        }
+
+        for (unsigned int i = 0; i < largest/6; i++) {
+            sout << " ";
+        }
+        sout << endl;
+    }
     return sout.str();
 }
