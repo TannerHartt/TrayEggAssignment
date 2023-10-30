@@ -1,8 +1,8 @@
 #ifndef TRAY_H // header guards
 #define TRAY_H // header guards
 #include <iostream>
-using namespace std;
 #include "Egg.h"
+using namespace std;
 
 
 class Tray {
@@ -19,10 +19,9 @@ class Tray {
         void place_back(Egg egg);
         void place_front(Egg egg);
         void remove(Egg badEgg);
+        bool take_back(Egg& egg);
         friend ostream& operator<<(ostream& os, const Tray& rhs);
         friend bool operator==(const Tray& lhs, const Tray& rhs);
 };
-
-ostream& operator<<(ostream& os, const Tray& rhs);
 
 #endif

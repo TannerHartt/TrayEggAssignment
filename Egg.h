@@ -11,8 +11,10 @@ class Egg {
         Egg();
         Egg(float weight);
         char getWeightChar();
+        void clear();
         friend ostream& operator<<(ostream& os, const Egg& rhs);
         friend bool operator==(const Egg& lhs, const Egg& rhs);
+        friend bool operator<(const Egg& lhs, const Egg& rhs);
 };
 
 #endif

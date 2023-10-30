@@ -64,7 +64,9 @@ char Egg::getWeightChar() {
     return ' '; // Should never get here.
 };
 
-/*
-Egg equaity operator function
-if two eggs are equal, return false, else return true
-*/
+bool operator<(const Egg& lhs, const Egg& rhs) {
+  return rhs.weightInOunces == lhs.weightInOunces ? true : false;
+}
+ void Egg::clear() {
+    weightInOunces = 0;
+ }

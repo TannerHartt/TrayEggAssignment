@@ -137,8 +137,10 @@ void Tray::place_front(Egg egg) {
     currentEggs++;
 };
 
-/*
-Tray take back function - assign the back most egg to the parameter one and remove it
-bool take_back(Egg& e);
- * Look at screencast notes for solution steps 
-*/
+bool Tray::take_back(Egg& e) {
+    if (currentEggs == 0) return false;
+    e = carton[currentEggs - 1];
+    carton[currentEggs - 1].clear();
+    currentEggs--;
+    return true;
+}

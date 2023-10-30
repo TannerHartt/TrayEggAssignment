@@ -18,11 +18,8 @@ class Conveyor {
                 os << "\\   /\n";
                 os << " \\ / \n";
                 if (rhs.next != nullptr) os << "  $  \n";
-                else {
-                    os << "  S  \n";
-                    os << endl;
-                    os << endl;
-                }
+                else os << "  S  \n";
+                
                 return os;
             }
         };
@@ -38,6 +35,8 @@ class Conveyor {
         void attach_back(Tray* caboose);
         friend ostream& operator<<(ostream& os, const Conveyor& rhs);
         void remove(const Tray& thisone);
+        Tray* detach_front();
+
 };
 
 #endif
