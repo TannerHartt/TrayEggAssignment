@@ -29,29 +29,34 @@ ostream& operator<<(ostream& os, const Egg& rhs)
   return os;
 };
 
+// bool operator==(const Egg& lhs, const Egg& rhs) {
+//     if (lhs.weightInOunces < 1.25 && rhs.weightInOunces < 1.25) {
+//       return true;
+//     } else if (lhs.weightInOunces >= 1.25 && lhs.weightInOunces < 1.5 &&
+//         rhs.weightInOunces >= 1.25 && rhs.weightInOunces < 1.5 ) {
+//         return true;
+//     } else if (lhs.weightInOunces >= 1.5 && lhs.weightInOunces < 1.75 &&
+//                rhs.weightInOunces >= 1.5 && rhs.weightInOunces < 1.75 ) {
+//                return true;
+//     } else if (lhs.weightInOunces >= 1.75 && lhs.weightInOunces < 2.0 && 
+//                 rhs.weightInOunces >= 1.75 && rhs.weightInOunces < 2.0 ) {
+//                 return true;
+//     } else if (lhs.weightInOunces >= 2.0 && lhs.weightInOunces < 2.25 && 
+//                 rhs.weightInOunces >= 2.0 && rhs.weightInOunces < 2.25 ) {
+//                 return true;
+//     } else if (lhs.weightInOunces >= 2.25 && lhs.weightInOunces < 2.5 && 
+//                 rhs.weightInOunces >= 2.25 && rhs.weightInOunces < 2.5 ) {
+//                 return true;
+//     } else if (lhs.weightInOunces >= 2.5 && rhs.weightInOunces >= 2.5) {
+//         return true;
+//     }
+//     return false;
+// };
+
+// Overload the == operator to compare based on the weight character
 bool operator==(const Egg& lhs, const Egg& rhs) {
-    if (lhs.weightInOunces < 1.25 && rhs.weightInOunces < 1.25) {
-      return true;
-    } else if (lhs.weightInOunces >= 1.25 && lhs.weightInOunces < 1.5 &&
-        rhs.weightInOunces >= 1.25 && rhs.weightInOunces < 1.5 ) {
-        return true;
-    } else if (lhs.weightInOunces >= 1.5 && lhs.weightInOunces < 1.75 &&
-               rhs.weightInOunces >= 1.5 && rhs.weightInOunces < 1.75 ) {
-               return true;
-    } else if (lhs.weightInOunces >= 1.75 && lhs.weightInOunces < 2.0 && 
-                rhs.weightInOunces >= 1.75 && rhs.weightInOunces < 2.0 ) {
-                return true;
-    } else if (lhs.weightInOunces >= 2.0 && lhs.weightInOunces < 2.25 && 
-                rhs.weightInOunces >= 2.0 && rhs.weightInOunces < 2.25 ) {
-                return true;
-    } else if (lhs.weightInOunces >= 2.25 && lhs.weightInOunces < 2.5 && 
-                rhs.weightInOunces >= 2.25 && rhs.weightInOunces < 2.5 ) {
-                return true;
-    } else if (lhs.weightInOunces >= 2.5 && rhs.weightInOunces >= 2.5) {
-        return true;
-    }
-    return false;
-};
+    return lhs.weightInOunces == rhs.weightInOunces;
+}
 
 char Egg::getWeightChar() {
     if (weightInOunces < 1.25) return 'E'; 
@@ -65,7 +70,11 @@ char Egg::getWeightChar() {
 };
 
 bool operator<(const Egg& lhs, const Egg& rhs) {
-  return rhs.weightInOunces == lhs.weightInOunces ? true : false;
+  return lhs.weightInOunces < rhs.weightInOunces;
+}
+
+bool operator<=(const Egg& lhs, const Egg& rhs) {
+    return lhs < rhs || lhs == rhs;
 }
  void Egg::clear() {
     weightInOunces = 0;
