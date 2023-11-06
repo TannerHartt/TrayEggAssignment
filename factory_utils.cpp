@@ -74,11 +74,8 @@ string vertical_report(const vector<Conveyor*> &assembly_line) {
     for (unsigned int i = 0; i < largest; i+=6) {
         for (unsigned int j = 0; j < strings.size(); j++) {
             for (unsigned int k = 0; k < 5; k++) {
-                if ((i + 6) < strings.at(j).size()) {
-                    sout << strings.at(j).at(i + k);
-                } else {
-                    sout << ' ';
-                }
+                if ((i + k) < strings.at(j).size()) sout << strings.at(j).at(i + k);
+                else sout << ' ';
             }
             sout << "  ";
         }

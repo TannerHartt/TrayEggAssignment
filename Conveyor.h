@@ -1,5 +1,6 @@
 #include <iostream>
 using namespace std;
+#include <cassert>
 #ifndef CONVEYOR_H // header guards
 #define CONVEYOR_H // header guards
 #include "Tray.h"
@@ -17,9 +18,8 @@ class Conveyor {
                 os << *rhs.tray;
                 os << "\\   /\n";
                 os << " \\ / \n";
-                if (rhs.next != nullptr) os << "  $  \n";
-                else os << "  S  \n";
-                
+                if (rhs.next == nullptr) os << "  S  \n";
+                else os << "  $  \n";
                 return os;
             }
         };
@@ -36,7 +36,6 @@ class Conveyor {
         friend ostream& operator<<(ostream& os, const Conveyor& rhs);
         void remove(const Tray& thisone);
         Tray* detach_front();
-
 };
 
 #endif

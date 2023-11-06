@@ -4,16 +4,8 @@ using namespace std;
 
 
 Big_time::Big_time() : eggs(new Egg[1]), numEggs(0), capacity(1) {};
-
 Big_time::~Big_time() { delete[] eggs; };
 
-// void Big_time::give_egg(Egg g) adds an egg to the internal array of eggs
-//     if capacity equals num_eggs, then double the capacity before adding the egg. Refer to Tray::place_back to remind yourself how to grow the capacity. But note that Tray only increases capacity by two, whereas you will double the current capacity.
-//     add egg to end and increase num_eggs by 1
-//     percolate upthe new egg
-// void Big_time::take_egg(Egg& g) assigns the first egg to the argument g.
-//     The last egg moves to the first position and num_eggs is reduced by 1
-//     percolate down the egg now in the first position
 void Big_time::bubbleUp() {
     int index = numEggs - 1;
     Egg element = eggs[index];

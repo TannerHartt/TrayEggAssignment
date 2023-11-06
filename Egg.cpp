@@ -53,7 +53,6 @@ ostream& operator<<(ostream& os, const Egg& rhs)
 //     return false;
 // };
 
-// Overload the == operator to compare based on the weight character
 bool operator==(const Egg& lhs, const Egg& rhs) {
     return lhs.weightInOunces == rhs.weightInOunces;
 }
