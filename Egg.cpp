@@ -7,8 +7,7 @@ Egg::Egg() : weightInOunces(0) { };
 
 Egg::Egg(float weight) : weightInOunces(weight) { };
 
-ostream& operator<<(ostream& os, const Egg& rhs)
-{
+ostream& operator<<(ostream& os, const Egg& rhs) {
   if (rhs.weightInOunces == 0) {
     os << " ";
   } else if (rhs.weightInOunces < 1.25) {
@@ -53,28 +52,36 @@ ostream& operator<<(ostream& os, const Egg& rhs)
 //     return false;
 // };
 
-bool operator==(const Egg& lhs, const Egg& rhs) {
-    return lhs.weightInOunces == rhs.weightInOunces;
-}
-
-char Egg::getWeightChar() {
-    if (weightInOunces < 1.25) return 'E'; 
-    else if (weightInOunces >= 1.25 && weightInOunces < 1.5) return '.';
-    else if (weightInOunces >= 1.5 && weightInOunces < 1.75) return '*';
-    else if (weightInOunces >= 1.75 && weightInOunces < 2.0) return 'o';
-    else if (weightInOunces >= 2.0 && weightInOunces < 2.25) return 'O';
-    else if (weightInOunces >= 2.25 && weightInOunces < 2.5) return '0';
-    else if (weightInOunces >= 2.5) return '@';
-    return ' '; // Should never get here.
+bool operator==(const Egg &lhs, const Egg &rhs) {
+  return lhs.weightInOunces == rhs.weightInOunces;
 };
 
-bool operator<(const Egg& lhs, const Egg& rhs) {
-  return lhs.weightInOunces < rhs.weightInOunces;
-}
+char Egg::getWeightChar() {
+  if (weightInOunces < 1.25)
+    return 'E';
+  else if (weightInOunces >= 1.25 && weightInOunces < 1.5)
+    return '.';
+  else if (weightInOunces >= 1.5 && weightInOunces < 1.75)
+    return '*';
+  else if (weightInOunces >= 1.75 && weightInOunces < 2.0)
+    return 'o';
+  else if (weightInOunces >= 2.0 && weightInOunces < 2.25)
+    return 'O';
+  else if (weightInOunces >= 2.25 && weightInOunces < 2.5)
+    return '0';
+  else if (weightInOunces >= 2.5)
+    return '@';
+  return ' '; // Should never get here.
+};
 
-bool operator<=(const Egg& lhs, const Egg& rhs) {
-    return lhs < rhs || lhs == rhs;
-}
- void Egg::clear() {
-    weightInOunces = 0;
- }
+bool operator<(const Egg &lhs, const Egg &rhs) {
+  return lhs.weightInOunces < rhs.weightInOunces;
+};
+
+bool operator<=(const Egg &lhs, const Egg &rhs) {
+  return lhs < rhs || lhs == rhs;
+};
+
+void Egg::clear() {
+  weightInOunces = 0;
+};

@@ -3,9 +3,9 @@ using namespace std;
 #include "Conveyor.h"
 #include "Tray.h"
 
-Conveyor::Conveyor() : head(nullptr), tail(nullptr), length(0) {}
-Conveyor::Harness::Harness(Tray* t, Harness* n) : tray(t), next(n) {}
-Conveyor::Harness::~Harness() { delete tray; }
+Conveyor::Conveyor() : head(nullptr), tail(nullptr), length(0) {};
+Conveyor::Harness::Harness(Tray* t, Harness* n) : tray(t), next(n) {};
+Conveyor::Harness::~Harness() { delete tray; };
 
 Conveyor::~Conveyor() {
    Harness* curr = head;
@@ -15,7 +15,7 @@ Conveyor::~Conveyor() {
       delete temp;
    }
    length--;
-}
+};
 
 void Conveyor::attach_front(Tray* engine) {
    if (!head) {
@@ -26,7 +26,7 @@ void Conveyor::attach_front(Tray* engine) {
       head = new Harness(engine, head);
    }
    length++;
-}
+};
 
 void Conveyor::attach_back(Tray* caboose) {
    Harness* temp = new Harness(caboose);
@@ -38,7 +38,7 @@ void Conveyor::attach_back(Tray* caboose) {
       tail = temp;
    }
    length++;
-}
+};
 
 ostream& operator<<(ostream& os, const Conveyor& rhs) {
    os << "  |  " << endl;
@@ -51,7 +51,7 @@ ostream& operator<<(ostream& os, const Conveyor& rhs) {
       curr = curr->next;
    }
    return os;
-}
+};
 
 void Conveyor::remove(const Tray& searchTray) {
    Harness* prev = nullptr;
@@ -71,7 +71,7 @@ void Conveyor::remove(const Tray& searchTray) {
         }
    }
    length--;
-}
+};
 
 Tray* Conveyor::detach_front() {
    if (!head) return nullptr;

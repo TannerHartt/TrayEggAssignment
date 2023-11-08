@@ -20,7 +20,7 @@ char charSwap(char ch) {
                 break;
         }
     return ch;
-}
+};
 
 void load_conveyors(vector<Conveyor*> &assembly_line) {
     string input;
@@ -41,7 +41,7 @@ void load_conveyors(vector<Conveyor*> &assembly_line) {
             currTray->place_back(Egg(egg));
         }
     }
-}
+};
 
 string basic_report(const vector<Conveyor*> &assembly_line) {
     ostringstream sout;
@@ -49,7 +49,7 @@ string basic_report(const vector<Conveyor*> &assembly_line) {
         sout << *assembly_line.at(i) << "\n\n";
     
     return sout.str();
-}
+};
 
 string vertical_report(const vector<Conveyor*> &assembly_line) {
     
@@ -83,7 +83,7 @@ string vertical_report(const vector<Conveyor*> &assembly_line) {
     }
 
     return sout.str();
-}
+};
 
 string horizontal_report(const vector<Conveyor*> &assembly_line) {
     
@@ -121,4 +121,4 @@ string horizontal_report(const vector<Conveyor*> &assembly_line) {
         sout << endl;
     }
     return sout.str();
-}
+};
